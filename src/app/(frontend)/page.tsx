@@ -3,9 +3,14 @@ import Image from 'next/image'
 import { getPayload } from 'payload'
 import React from 'react'
 import { fileURLToPath } from 'url'
+import { Page } from '@/payload-types'
 
 import config from '@/payload.config'
 import './styles.css'
+import { json } from 'stream/consumers'
+
+import ContentBlock from './components/ContentBlock'
+import HeroBlock from './components/HeroBlock'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -15,7 +20,30 @@ export default async function HomePage() {
 
   const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
 
+  const {
+    docs: [page],
+  } = await payload.find({
+    collection: 'pages',
+    where: {
+      slug: { equals: 'landing-page' },
+    },
+  })
+
+  const renderBlocks = (block: Page['layout'][0]) => {
+    switch (block.blockType) {
+      case 'hero':
+        return <HeroBlock block={block} key={block.id} />
+      case 'content':
+        return <ContentBlock block={block} key={block.id} />
+      default:
+        return null
+    }
+  }
+
   return (
-    <div className="bg-red-500">Main</div>
+    <main>
+      {page.title}
+      <div className='page'>{page.layout?.map((block) => renderBlocks(block))}</div>
+    </main>
   )
 }
