@@ -37,6 +37,5 @@ export default buildConfig({
   plugins: [
     payloadCloudPlugin(),
     formBuilderPlugin({})
-    // storage-adapter-placeholder
   ],
 })

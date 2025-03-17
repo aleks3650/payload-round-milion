@@ -11,6 +11,7 @@ import { json } from 'stream/consumers'
 
 import ContentBlock from './components/ContentBlock'
 import HeroBlock from './components/HeroBlock'
+import NewsletterBlock from './components/NewsletterBlock'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -35,15 +36,17 @@ export default async function HomePage() {
         return <HeroBlock block={block} key={block.id} />
       case 'content':
         return <ContentBlock block={block} key={block.id} />
+      case "newsletter-form":
+        return <NewsletterBlock block={block} key={block.id} />
       default:
         return null
     }
   }
 
   return (
-    <main>
+    <div>
       {page.title}
       <div className='page'>{page.layout?.map((block) => renderBlocks(block))}</div>
-    </main>
+    </div>
   )
 }
