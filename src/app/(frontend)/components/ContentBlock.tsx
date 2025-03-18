@@ -4,6 +4,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 type ContentProps = Extract<Page['layout'][0], { blockType: 'content' }>
 
 export default function ContentBlock({ block }: { block: ContentProps }) {
+  if(!block) return
   return (
     <div>
       <div>

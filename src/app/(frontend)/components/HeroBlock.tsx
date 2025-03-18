@@ -19,6 +19,7 @@ type HeroProps = Extract<Page['layout'][0], { blockType: 'hero' }>
  * @returns {JSX.Element} Hero section component
  */
 export default function HeroBlock({ block }: { block: HeroProps }) {
+  if(!block) return
   return (
     <div
       style={{

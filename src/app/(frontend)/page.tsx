@@ -8,6 +8,7 @@ import { Page } from '@/payload-types'
 import config from '@/payload.config'
 import './styles.css'
 import { json } from 'stream/consumers'
+import Link from 'next/link'
 
 import ContentBlock from './components/ContentBlock'
 import HeroBlock from './components/HeroBlock'
@@ -44,9 +45,10 @@ export default async function HomePage() {
   }
 
   return (
-    <div>
-      {page.title}
-      <div className='page'>{page.layout?.map((block) => renderBlocks(block))}</div>
+    <div className='p-4'>
+      {/* {page.title} */}
+      {/* <div className='page'>{page.layout?.map((block) => renderBlocks(block))}</div> */}
+      <Link href={"/search"} className='underline decoration-2 decoration-blue-400'>Search</Link>
     </div>
   )
 }

@@ -92,6 +92,7 @@ export default function NewsletterBlock({ block }: { block: NewsletterProps }) {
       })
     }
   }
+  if(!block) return
   return (
     <div>
       {typeof block?.form === 'object' && block?.form?.title === 'newsletter' && (
